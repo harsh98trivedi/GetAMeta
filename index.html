@@ -1,0 +1,250 @@
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GetAMeta</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+  <meta name="title" content="GetAMeta">
+  <meta name="description"
+    content="GetAMeta is a powerful and user-friendly meta tag generator that helps you optimize your website's metadata effortlessly. Boost your search engine visibility, enhance social media sharing, and improve overall website performance with accurate and well-crafted meta tags. Maximize your online presence and drive organic traffic with GetAMeta - the ultimate tool for SEO success.">
+  <meta name="keywords"
+    content="meta tags generator, meta tags, meta, open graph, facebook meta tags, twitter meta tags, meta tags for seo, schema meta tags, search engine optimization tools, seo tool">
+  <meta name="image" content="https://raw.githubusercontent.com/harsh98trivedi/GetAMeta/master/meta.png">
+
+  <!-- Open Graph general (Facebook, Pinterest) -->
+  <meta name="og:title" content="GetAMeta">
+  <meta name="og:description"
+    content="GetAMeta is a powerful and user-friendly meta tag generator that helps you optimize your website's metadata effortlessly. Boost your search engine visibility, enhance social media sharing, and improve overall website performance with accurate and well-crafted meta tags. Maximize your online presence and drive organic traffic with GetAMeta - the ultimate tool for SEO success.">
+  <meta name="og:image" content="https://raw.githubusercontent.com/harsh98trivedi/GetAMeta/master/meta.png">
+  <meta name="og:image:alt" content="GetAMeta">
+  <meta name="og:site_name" content="GetAMeta">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="GetAMeta">
+  <meta name="twitter:description"
+    content="GetAMeta is a powerful and user-friendly meta tag generator that helps you optimize your website's metadata effortlessly. Boost your search engine visibility, enhance social media sharing, and improve overall website performance with accurate and well-crafted meta tags. Maximize your online presence and drive organic traffic with GetAMeta - the ultimate tool for SEO success.">
+  <meta name="twitter:image:src" content="https://raw.githubusercontent.com/harsh98trivedi/GetAMeta/master/meta.png">
+
+  <!-- Search Engine -->
+  <meta name="description"
+    content="GetAMeta is a powerful and user-friendly meta tag generator that helps you optimize your website's metadata effortlessly. Boost your search engine visibility, enhance social media sharing, and improve overall website performance with accurate and well-crafted meta tags. Maximize your online presence and drive organic traffic with GetAMeta - the ultimate tool for SEO success.">
+  <meta name="image" content="https://raw.githubusercontent.com/harsh98trivedi/GetAMeta/master/meta.png">
+
+  <!-- Schema.org for Google -->
+  <meta itemprop="name" content="GetAMeta">
+  <meta name="author" content="">
+  <meta itemprop="description"
+    content="GetAMeta is a powerful and user-friendly meta tag generator that helps you optimize your website's metadata effortlessly. Boost your search engine visibility, enhance social media sharing, and improve overall website performance with accurate and well-crafted meta tags. Maximize your online presence and drive organic traffic with GetAMeta - the ultimate tool for SEO success.">
+  <meta itemprop="image" content="https://raw.githubusercontent.com/harsh98trivedi/GetAMeta/master/meta.png">
+
+</head>
+
+<body class="flex flex-col min-h-screen p-4 bg-gray-100">
+  <header class="text-black text-center py-6 mx-auto">
+    <a href="#">
+      <figure class="aspect-w-16 aspect-h-9">
+        <img class="w-3/6 mx-auto" src='logo.svg' alt="Get A Meta" />
+      </figure>
+    </a>
+  </header>
+
+  <form id="meta-form" class="flex flex-col space-y-4 mb-4">
+    <input type="text" name="title" placeholder="Title of your Website" class="p-4 border border-gray-300 rounded-md"
+      required>
+    <textarea cols="30" rows="3" name="description" placeholder="Description of your Website"
+      class="p-4 border border-gray-300 rounded-md resize-y" required></textarea>
+    <div class="flex flex-wrap items-center border border-gray-300 rounded-md">
+      <div id="keywords-container" class="flex flex-wrap space-x-2 p-2"></div>
+      <input type="text" name="keywords" id="keyword-input" placeholder="Keywords (separated by commas)"
+        class="flex-1 p-2 outline-none">
+      <button id="clear-button"
+        class="clear-button bg-red-500 text-white p-2 rounded cursor-pointer transition-all">Clear</button>
+    </div>
+    <input type="text" name="image" placeholder="Meta Image URL" class="p-4 border border-gray-300 rounded-md">
+    <input type="number" name="revisit" placeholder="Crawl this Webite Every 'X' Days"
+      class="p-4 border border-gray-300 rounded-md" min="1" required>
+    <button type="submit" id="generate-button" value="Generate"
+      class="p-4 bg-black text-white rounded-md cursor-pointer">Generate</button>
+  </form>
+
+  <textarea id="meta-tag" cols="30" rows="10" readonly
+    class="border border-gray-700 rounded-md resize-y mt-4 opacity-50" placeholder="Your Meta Tags Will Appear Here">
+  </textarea>
+
+  <button id="copy-button" class="copy-button bg-black text-white p-4 rounded-md cursor-pointer mt-4">Copy</button>
+
+  <footer class="text-center py-4 mt-auto">
+    Made with ❤️ by <a href="https://htlink.netlify.app" target="_blank"><u>Harsh Trivedi</u></a>
+  </footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(function () {
+      // Function to add keywords as labels
+      function addKeyword(keyword) {
+        var keywordLabel = $("<div>", {
+          class: "flex items-center bg-gray-200 rounded p-2",
+        });
+        var keywordText = $("<span>", {
+          text: keyword,
+          class: "mr-2",
+        });
+        var deleteButton = $("<button>", {
+          text: "x",
+          class: "bg-red-500 text-white p-1 rounded cursor-pointer",
+          click: function () {
+            $(this).parent().remove();
+          },
+        });
+        keywordLabel.append(keywordText, deleteButton);
+        $("#keywords-container").append(keywordLabel);
+      }
+
+      // Event handler for keyword input
+      $("#keyword-input").keydown(function (e) {
+        if (e.key === "Enter" || e.key === ",") {
+          e.preventDefault();
+          var keywords = $(this).val().trim();
+          var keywordArray = keywords.split(",");
+          keywordArray.forEach(function (keyword) {
+            keyword = keyword.trim();
+            if (keyword !== "") {
+              addKeyword(keyword);
+            }
+          });
+          $(this).val("");
+        }
+      });
+
+      // Clear button click event
+      $("#clear-button").click(function (e) {
+        e.preventDefault();
+        $("#keywords-container").empty();
+      });
+
+      // Animation timeout variables
+      var generateAnimationTimeout;
+      var copyAnimationTimeout;
+
+      $("#meta-form").submit(function (e) {
+        e.preventDefault();
+
+        // Animation for Generate button
+        clearTimeout(generateAnimationTimeout);
+        $("#generate-button").addClass("bg-green-500").css("transition-duration", "0.05s");
+        generateAnimationTimeout = setTimeout(function () {
+          $("#generate-button").removeClass("bg-green-500").css("transition-duration", "");
+        }, 150);
+
+        var title = $("#meta-form input[name='title']").val();
+        var description = $("#meta-form textarea[name='description']").val();
+        var keywords = $("#keywords-container span")
+          .map(function () {
+            return $(this).text();
+          })
+          .get()
+          .join(", ");
+        var image = $("#meta-form input[name='image']").val();
+        var revisit = $("#meta-form input[name='revisit']").val();
+
+        var metaTag = `
+          <meta name="title" content="${title}">
+          <meta name="description" content="${description}">
+          <meta name="keywords" content="${keywords}">
+          <meta name="image" content="${image}">
+
+          <!-- Open Graph general (Facebook, Pinterest) -->
+          <meta name="og:title" content="${title}">
+          <meta name="og:description" content="${description}">
+          <meta name="og:image" content="${image}">
+          <meta name="og:image:alt" content="${title}">
+          <meta name="og:site_name" content="${title}">
+
+          <!-- Twitter -->
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="${title}">
+          <meta name="twitter:description" content="${description}">
+          <meta name="twitter:image:src" content="${image}">
+
+          <!-- Search Engine -->
+          <meta name="description" content="${description}">
+          <meta name="image" content="${image}">
+
+          <!-- Schema.org for Google -->
+          <meta itemprop="name" content="${title}">
+          <meta itemprop="description" content="${description}">
+          <meta itemprop="image" content="${image}">
+
+          <meta name="revisit-after" content="${revisit} days">
+        `;
+        $("#meta-tag").val(metaTag);
+      });
+
+      $("#copy-button").click(function () {
+        var copyText = document.getElementById("meta-tag");
+        navigator.clipboard.writeText(copyText.value);
+
+        // Add copied animation
+        clearTimeout(copyAnimationTimeout);
+        var $copyButton = $(this);
+        $copyButton.addClass("bg-green-500");
+        copyAnimationTimeout = setTimeout(function () {
+          $copyButton.removeClass("bg-green-500");
+        }, 500);
+
+        // Change the button text to "Copied"
+        $copyButton.text("Copied, Enjoy!").css("transition-duration", "0.5s");
+
+        // Change the button text back to the original after 0.5 seconds
+        setTimeout(function () {
+          $copyButton.text("Copy").css("transition-duration", "0.5s");
+        }, 550);
+      });
+
+      // Click animation for Clear button
+      $("#clear-button").mousedown(function () {
+        $(this).addClass("bg-red-700");
+      });
+
+      $("#clear-button").mouseup(function () {
+        $(this).removeClass("bg-red-700");
+      });
+
+      $("#clear-button").mouseleave(function () {
+        $(this).removeClass("bg-red-700");
+      });
+    });
+
+    $(document).ready(function () {
+      // Animations
+      gsap.from('header', {
+        opacity: 0,
+        y: -20,
+        duration: 0.25,
+        delay: 0.3,
+        stagger: 0.3
+      });
+      gsap.from('#meta-form > *', {
+        opacity: 0,
+        y: -20,
+        duration: 0.5,
+        delay: 0.3,
+        stagger: 0.1
+      });
+      gsap.from('#meta-tag, #copy-button, footer', {
+        opacity: 0,
+        y: -20,
+        duration: 0.5,
+        delay: 0.7,
+        stagger: 0.3
+      });
+    });
+  </script>
+</body>
+
+</html>

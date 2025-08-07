@@ -122,18 +122,18 @@
         </label>
         <div class="border border-gray-300 rounded-xl bg-white shadow-sm overflow-hidden transition-all">
           <div id="keywords-container" class="flex flex-wrap gap-2 p-4 min-h-16"></div>
-          <div class="flex border-t border-gray-200">
+          <div class="flex border-t border-gray-200 flex-wrap justify-center">
             <input 
               type="text" 
               name="keywords" 
               id="keyword-input" 
               placeholder="Type keywords and press Enter or comma"
-              class="flex-1 p-4 outline-none bg-transparent text-gray-900 placeholder-gray-500"
+              class="flex-1 p-3 outline-none bg-transparent text-gray-900 placeholder-gray-500 sm:border-b md:border-none border-gray-300"
               aria-describedby="keywords-help">
             <button 
               id="clear-button" 
               type="button"
-              class="bg-red-500 hover:bg-red-600 text-white px-5 py-3 m-2 rounded-lg cursor-pointer transition-all flex items-center"
+              class="flex-auto sm:flex-1 md:flex-none justify-center bg-red-500 hover:bg-red-600 text-white p-2.5 m-2.5 lg:rounded-full rounded-xl cursor-pointer transition-all flex items-center"
               aria-label="Clear all keywords">
               <i class="fas fa-trash" aria-hidden="true"></i>
             </button>

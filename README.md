@@ -44,6 +44,11 @@ Pull requests and suggestions are always welcome.
 - [Open an Issue](https://github.com/harsh98trivedi/GetAMeta/issues)
 - [Submit a Pull Request](https://github.com/harsh98trivedi/GetAMeta/pulls)
 
+
+## License
+
+This project is licensed under the [GNU General Public License v3.0](https://github.com/harsh98trivedi/GetAMeta/blob/master/LICENSE.md).
+
 ---
 
 Made with ❤️ by [Harsh Trivedi](https://htlink.netlify.app)

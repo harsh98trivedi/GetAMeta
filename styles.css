@@ -1,0 +1,279 @@
+/* ================== */
+/* Base Site Styling  */
+/* ================== */
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* White rectangle behind logo, always white */
+.logo-bg {
+  background: #fff !important;
+  /* Add padding, border-radius, etc if needed */
+}
+.dark .logo-bg {
+  background: #fff !important;
+}
+
+/* ================== */
+/* Dark Mode Styling  */
+/* ================== */
+
+.dark {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+.dark header {
+  color: #e2e8f0;
+}
+
+.dark #meta-form,
+.dark .bg-white {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+
+.dark .text-gray-700,
+.dark .text-gray-800 {
+  color: #cbd5e1;
+}
+
+.dark .text-gray-600 {
+  color: #94a3b8;
+}
+
+.dark .text-gray-500 {
+  color: #64748b;
+}
+
+.dark input,
+.dark textarea {
+  background-color: #334155;
+  color: #e2e8f0;
+  border-color: #475569;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #94a3b8;
+}
+
+.dark input:focus,
+.dark textarea:focus {
+  border-color: #60a5fa;
+  --tw-ring-color: rgba(96, 165, 250, 0.3);
+}
+
+.dark #keywords-container {
+  background-color: #334155;
+  border-color: #475569;
+}
+
+.dark #keywords-container > div:last-child {
+  border-color: #475569;
+}
+
+.dark #keyword-input {
+  background-color: transparent;
+  color: #e2e8f0;
+}
+
+.dark #keyword-input::placeholder {
+  color: #94a3b8;
+}
+
+.dark #meta-tag {
+  background-color: #1e293b;
+  color: #10b981;
+  border-color: #475569;
+}
+
+.dark #dark-mode-toggle {
+  background-color: #334155;
+  border-color: #475569;
+}
+
+.dark footer p {
+  color: #94a3b8;
+}
+
+.dark footer a {
+  color: #60a5fa;
+}
+
+.dark footer a:hover {
+  color: #93c5fd;
+}
+
+/* ===================== */
+/* Keyword Suggestions   */
+/* ===================== */
+
+.suggested-keyword {
+  background-color: #ddd6fe;
+  border: 2px dashed #8b5cf6;
+  color: #6b21a8;
+  font-weight: 500;
+  animation: pulse-subtle 2s infinite;
+  transition: all 0.2s ease;
+}
+.suggested-keyword:hover {
+  background-color: #c4b5fd;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(139, 92, 246, 0.2);
+}
+.dark .suggested-keyword {
+  background-color: #374151;
+  border-color: #8b5cf6;
+  color: #c4b5fd;
+}
+.dark .suggested-keyword:hover {
+  background-color: #4b5563;
+  box-shadow: 0 4px 8px rgba(139, 92, 246, 0.3);
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+/* ================= */
+/* Regular Keywords  */
+/* ================= */
+
+.keyword-tag {
+  background-color: #10b981;
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+  transition: all 0.2s ease;
+}
+.keyword-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.4);
+  background-color: #059669;
+}
+.keyword-tag button {
+  transition: all 0.2s ease;
+}
+.keyword-tag button:hover {
+  color: #fca5a5;
+}
+
+/* =================== */
+/* Button Styling      */
+/* =================== */
+
+#generate-button, #copy-button, #clear-button {
+  transition: all 0.2s ease;
+}
+#generate-button:hover,
+#copy-button:hover,
+#clear-button:hover {
+  transform: translateY(-1px);
+}
+#generate-button:active,
+#copy-button:active,
+#clear-button:active {
+  transform: translateY(0);
+}
+
+/* Hide text, show icon on small screens */
+@media (max-width: 600px) {
+  .clear-btn .clear-text { display: none; }
+  .clear-btn .trash-icon { display: inline-block; }
+}
+@media (min-width: 601px) {
+  .clear-btn .clear-text { display: inline; }
+  .clear-btn .trash-icon { display: none; }
+}
+
+
+/* ===================== */
+/* Dark Mode Toggle Btn  */
+/* ===================== */
+
+#dark-mode-toggle {
+  transition: all 0.3s ease;
+}
+#dark-mode-toggle:hover {
+  transform: scale(1.1);
+}
+
+#dark-mode-toggle {
+  width: 45px;
+  height: 45px;
+  font-size: 1.25rem;
+}
+
+/* ===================== */
+/* Form Focus States     */
+/* ===================== */
+
+input:focus,
+textarea:focus,
+#keywords-container:focus-within {
+  transform: translateY(-1px);
+}
+
+/* ===================== */
+/* Logo Hover Effect     */
+/* ===================== */
+
+header figure > div {
+  transition: all 0.3s ease;
+}
+header figure > div:hover {
+  transform: translateY(-2px);
+}
+
+/* ============================ */
+/* Accessibility Improvements   */
+/* ============================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .suggested-keyword,
+  .keyword-tag {
+    border-width: 3px;
+    font-weight: 600;
+  }
+  .keyword-tag {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ===================================== */
+/* Meta Tags Output Box >> KEY CHANGES   */
+/* ===================================== */
+
+/* Default: Light mode */
+#meta-tags-box, #meta-tag {
+  background: #fff;
+  color: #1e293b;
+  overflow: auto;
+  scrollbar-width: none !important;      /* Firefox: hide scrollbar */
+  -ms-overflow-style: none !important;   /* IE & Edge: hide scrollbar */
+}
+/* Chrome, Safari, Opera: hide scrollbar */
+#meta-tags-box::-webkit-scrollbar {
+  display: none !important;
+}
+/* DARK MODE for meta tags box */
+.dark #meta-tags-box {
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+#meta-form {
+  padding: 1rem !important; /* 1rem is Bootstrap/Tailwind's p-3 value */
+}

@@ -1,12 +1,16 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GetAMeta</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+  <script src="https://unpkg.com/compromise"></script>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="styles.css">
 
   <meta name="title" content="GetAMeta">
   <meta name="description"
@@ -41,218 +45,173 @@
   <meta itemprop="description"
     content="GetAMeta is a powerful and user-friendly meta tag generator that helps you optimize your website's metadata effortlessly. Boost your search engine visibility, enhance social media sharing, and improve overall website performance with accurate and well-crafted meta tags. Maximize your online presence and drive organic traffic with GetAMeta - the ultimate tool for SEO success.">
   <meta itemprop="image" content="https://raw.githubusercontent.com/harsh98trivedi/GetAMeta/master/meta.png">
-      <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-45C37D3GB5"></script>
-    <script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-45C37D3GB5"></script>
+  <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-45C37D3GB5');
-    </script>
+  </script>
 </head>
 
-<body class="flex flex-col min-h-screen p-4 bg-gray-100">
-  <header class="text-black text-center py-6 mx-auto">
-    <a href="#">
+<body class="min-h-screen bg-slate-50 transition-colors duration-300">
+  
+  <!-- Dark Mode Toggle -->
+  <div class="fixed top-6 right-5 z-50">
+    <button 
+      id="dark-mode-toggle" 
+      class="flex p-3 rounded-full bg-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 border border-gray-200"
+      aria-label="Toggle dark mode">
+      <i class="fas fa-sun text-lg text-yellow-500 sun-icon"></i>
+      <i class="fas fa-moon text-lg text-indigo-600 moon-icon" style="display: none;"></i>
+    </button>
+  </div>
+
+  <!-- Header -->
+  <header class="text-gray-800 text-center py-5 mx-auto max-w-4xl mt-5">
+    <a href="#" class="block">
       <figure class="aspect-w-16 aspect-h-9">
-        <img class="w-3/6 mx-auto" src='logo.svg' alt="Get A Meta" />
+        <div class="bg-white rounded-xl p-5 inline-block shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+          <img class="w-64 mx-auto" src='logo.svg' alt="Get A Meta Logo" />
+        </div>
       </figure>
     </a>
   </header>
 
-  <form id="meta-form" class="flex flex-col space-y-4 mb-4">
-    <input type="text" name="title" placeholder="Title of your Website" class="p-4 border border-gray-300 rounded-md"
-      required>
-    <textarea cols="30" rows="3" name="description" placeholder="Description of your Website"
-      class="p-4 border border-gray-300 rounded-md resize-y" required></textarea>
-    <div class="flex flex-wrap items-center border border-gray-300 rounded-md">
-      <div id="keywords-container" class="flex flex-wrap space-x-2 p-2"></div>
-      <input type="text" name="keywords" id="keyword-input" placeholder="Keywords (separated by commas)"
-        class="flex-1 p-2 outline-none">
-      <button id="clear-button"
-        class="clear-button bg-red-500 text-white p-2 rounded cursor-pointer transition-all">Clear</button>
+  <!-- Main Container -->
+  <div class="max-w-4xl mx-auto w-full px-5 pb-5">
+    
+    <!-- Form -->
+    <form id="meta-form" class="bg-white rounded-2xl p-5 space-y-6 mb-5 shadow-lg border border-gray-200 select-none">
+      <div class="space-y-2">
+        <label for="title-input" class="text-gray-700 font-medium flex items-center">
+          <i class="fas fa-heading mr-2 text-blue-600" aria-hidden="true"></i>Website Title
+        </label>
+        <input 
+          type="text" 
+          name="title" 
+          id="title-input" 
+          placeholder="Enter your website title" 
+          class="w-full p-4 border border-gray-300 rounded-xl bg-white text-gray-900 placeholder-gray-500 transition-all shadow-sm" 
+          required
+          aria-describedby="title-help">
+        <small id="title-help" class="text-gray-500 text-sm">This will be the main title shown in search results</small>
+      </div>
+      
+      <div class="space-y-2">
+        <label for="description-input" class="text-gray-700 font-medium flex items-center">
+          <i class="fas fa-align-left mr-2 text-green-600" aria-hidden="true"></i>Website Description
+        </label>
+        <textarea 
+          cols="30" 
+          rows="4" 
+          name="description" 
+          id="description-input" 
+          placeholder="Describe your website and its purpose"
+          class="w-full p-4 border border-gray-300 rounded-xl resize-y bg-white text-gray-900 placeholder-gray-500 transition-all shadow-sm" 
+          required
+          aria-describedby="description-help"></textarea>
+        <small id="description-help" class="text-gray-500 text-sm">Optimal length: 150-160 characters</small>
+      </div>
+      
+      <div class="space-y-2">
+        <label for="keyword-input" class="text-gray-700 font-medium flex items-center">
+          <i class="fas fa-tags mr-2 text-purple-600" aria-hidden="true"></i>Keywords
+        </label>
+        <div class="border border-gray-300 rounded-xl bg-white shadow-sm overflow-hidden transition-all">
+          <div id="keywords-container" class="flex flex-wrap gap-2 p-4 min-h-16"></div>
+          <div class="flex border-t border-gray-200">
+            <input 
+              type="text" 
+              name="keywords" 
+              id="keyword-input" 
+              placeholder="Type keywords and press Enter or comma"
+              class="flex-1 p-4 outline-none bg-transparent text-gray-900 placeholder-gray-500"
+              aria-describedby="keywords-help">
+            <button 
+              id="clear-button" 
+              type="button"
+              class="bg-red-500 hover:bg-red-600 text-white px-5 py-3 m-2 rounded-lg cursor-pointer transition-all flex items-center"
+              aria-label="Clear all keywords">
+              <i class="fas fa-trash" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+        <small id="keywords-help" class="text-gray-500 text-sm">Add relevant keywords separated by commas. Suggested keywords will appear above.</small>
+      </div>
+      
+      <div class="space-y-2">
+        <label for="image-input" class="text-gray-700 font-medium flex items-center">
+          <i class="fas fa-image mr-2 text-pink-600" aria-hidden="true"></i>Meta Image URL
+        </label>
+        <input 
+          type="url" 
+          name="image" 
+          id="image-input"
+          placeholder="https://example.com/image.jpg" 
+          class="w-full p-4 border border-gray-300 rounded-xl bg-white text-gray-900 placeholder-gray-500 transition-all shadow-sm"
+          aria-describedby="image-help">
+        <small id="image-help" class="text-gray-500 text-sm">Recommended size: 1200x630 pixels</small>
+      </div>
+      
+      <div class="space-y-2">
+        <label for="revisit-input" class="text-gray-700 font-medium flex items-center">
+          <i class="fas fa-clock mr-2 text-orange-600" aria-hidden="true"></i>Revisit Frequency (Days)
+        </label>
+        <input 
+          type="number" 
+          name="revisit" 
+          id="revisit-input"
+          placeholder="7" 
+          class="w-full p-4 border border-gray-300 rounded-xl bg-white text-gray-900 placeholder-gray-500 transition-all shadow-sm" 
+          min="1" 
+          required
+          aria-describedby="revisit-help">
+        <small id="revisit-help" class="text-gray-500 text-sm">How often search engines should crawl your site</small>
+      </div>
+      
+      <button 
+        type="submit" 
+        id="generate-button"
+        class="w-full p-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl cursor-pointer transition-all font-semibold shadow-lg hover:shadow-xl transform hover:scale-[1.02] flex items-center justify-center">
+        <i class="fas fa-magic mr-2" aria-hidden="true"></i>Generate Meta Tags
+      </button>
+    </form>
+
+    <!-- Output -->
+    <div class="bg-white rounded-2xl p-5 space-y-4 shadow-lg border border-gray-200">
+      <h3 class="text-gray-700 font-semibold text-lg flex items-center">
+        <i class="fas fa-code mr-2 text-gray-600" aria-hidden="true"></i>Generated Meta Tags
+      </h3>
+      <textarea 
+        id="meta-tag" 
+        cols="30" 
+        rows="12" 
+        readonly
+        class="w-full border border-gray-300 rounded-xl resize-y p-4 bg-gray-900 text-green-400 font-mono text-sm shadow-sm opacity-50 scroll-none" 
+        placeholder="Your meta tags will appear here..."
+        aria-label="Generated meta tags"></textarea>
+        
+      <button 
+        id="copy-button" 
+        class="w-full bg-green-600 hover:bg-green-700 text-white p-4 rounded-xl cursor-pointer font-semibold transition-all shadow-lg hover:shadow-xl transform hover:scale-[1.02] flex items-center justify-center">
+        <i class="fas fa-copy mr-2" aria-hidden="true"></i>Copy to Clipboard
+      </button>
     </div>
-    <input type="text" name="image" placeholder="Meta Image URL" class="p-4 border border-gray-300 rounded-md">
-    <input type="number" name="revisit" placeholder="Crawl this Webite Every 'X' Days"
-      class="p-4 border border-gray-300 rounded-md" min="1" required>
-    <button type="submit" id="generate-button" value="Generate"
-      class="p-4 bg-black text-white rounded-md cursor-pointer">Generate</button>
-  </form>
+  </div>
 
-  <textarea id="meta-tag" cols="30" rows="10" readonly
-    class="border border-gray-700 rounded-md resize-y mt-4 opacity-50" placeholder="Your Meta Tags Will Appear Here">
-  </textarea>
-
-  <button id="copy-button" class="copy-button bg-black text-white p-4 rounded-md cursor-pointer mt-4">Copy</button>
-
-  <footer class="text-center py-4 mt-auto">
-    Made with ❤️ by <a href="https://htlink.netlify.app" target="_blank"><u>Harsh Trivedi</u></a>
+  <!-- Footer -->
+  <footer class="text-center py-5 max-w-4xl mx-auto">
+    <p class="text-gray-600">
+      Made with <i class="fas fa-heart text-red-500" aria-hidden="true"></i> by 
+      <a href="https://htlink.netlify.app" target="_blank" class="text-blue-600 hover:text-blue-700 transition-colors underline">Harsh Trivedi</a>
+    </p>
   </footer>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script>
-    $(function () {
-      // Function to add keywords as labels
-      function addKeyword(keyword) {
-        var keywordLabel = $("<div>", {
-          class: "flex items-center bg-gray-200 rounded p-2",
-        });
-        var keywordText = $("<span>", {
-          text: keyword,
-          class: "mr-2",
-        });
-        var deleteButton = $("<button>", {
-          text: "x",
-          class: "bg-red-500 text-white p-1 rounded cursor-pointer",
-          click: function () {
-            $(this).parent().remove();
-          },
-        });
-        keywordLabel.append(keywordText, deleteButton);
-        $("#keywords-container").append(keywordLabel);
-      }
-
-      // Event handler for keyword input
-      $("#keyword-input").keydown(function (e) {
-        if (e.key === "Enter" || e.key === ",") {
-          e.preventDefault();
-          var keywords = $(this).val().trim();
-          var keywordArray = keywords.split(",");
-          keywordArray.forEach(function (keyword) {
-            keyword = keyword.trim();
-            if (keyword !== "") {
-              addKeyword(keyword);
-            }
-          });
-          $(this).val("");
-        }
-      });
-
-      // Clear button click event
-      $("#clear-button").click(function (e) {
-        e.preventDefault();
-        $("#keywords-container").empty();
-      });
-
-      // Animation timeout variables
-      var generateAnimationTimeout;
-      var copyAnimationTimeout;
-
-      $("#meta-form").submit(function (e) {
-        e.preventDefault();
-
-        // Animation for Generate button
-        clearTimeout(generateAnimationTimeout);
-        $("#generate-button").addClass("bg-green-500").css("transition-duration", "0.05s");
-        generateAnimationTimeout = setTimeout(function () {
-          $("#generate-button").removeClass("bg-green-500").css("transition-duration", "");
-        }, 150);
-
-        var title = $("#meta-form input[name='title']").val();
-        var description = $("#meta-form textarea[name='description']").val();
-        var keywords = $("#keywords-container span")
-          .map(function () {
-            return $(this).text();
-          })
-          .get()
-          .join(", ");
-        var image = $("#meta-form input[name='image']").val();
-        var revisit = $("#meta-form input[name='revisit']").val();
-
-        var metaTag = `
-          <meta name="title" content="${title}">
-          <meta name="description" content="${description}">
-          <meta name="keywords" content="${keywords}">
-          <meta name="image" content="${image}">
-
-          <!-- Open Graph general (Facebook, Pinterest) -->
-          <meta name="og:title" content="${title}">
-          <meta name="og:description" content="${description}">
-          <meta name="og:image" content="${image}">
-          <meta name="og:image:alt" content="${title}">
-          <meta name="og:site_name" content="${title}">
-
-          <!-- Twitter -->
-          <meta property="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="${title}">
-          <meta name="twitter:description" content="${description}">
-          <meta name="twitter:image:src" content="${image}">
-
-          <!-- Search Engine -->
-          <meta name="description" content="${description}">
-          <meta name="image" content="${image}">
-
-          <!-- Schema.org for Google -->
-          <meta itemprop="name" content="${title}">
-          <meta itemprop="description" content="${description}">
-          <meta itemprop="image" content="${image}">
-
-          <meta name="revisit-after" content="${revisit} days">
-        `;
-        $("#meta-tag").val(metaTag);
-      });
-
-      $("#copy-button").click(function () {
-        var copyText = document.getElementById("meta-tag");
-        navigator.clipboard.writeText(copyText.value);
-
-        // Add copied animation
-        clearTimeout(copyAnimationTimeout);
-        var $copyButton = $(this);
-        $copyButton.addClass("bg-green-500");
-        copyAnimationTimeout = setTimeout(function () {
-          $copyButton.removeClass("bg-green-500");
-        }, 500);
-
-        // Change the button text to "Copied"
-        $copyButton.text("Copied, Enjoy!").css("transition-duration", "0.5s");
-
-        // Change the button text back to the original after 0.5 seconds
-        setTimeout(function () {
-          $copyButton.text("Copy").css("transition-duration", "0.5s");
-        }, 550);
-      });
-
-      // Click animation for Clear button
-      $("#clear-button").mousedown(function () {
-        $(this).addClass("bg-red-700");
-      });
-
-      $("#clear-button").mouseup(function () {
-        $(this).removeClass("bg-red-700");
-      });
-
-      $("#clear-button").mouseleave(function () {
-        $(this).removeClass("bg-red-700");
-      });
-    });
-
-    $(document).ready(function () {
-      // Animations
-      gsap.from('header', {
-        opacity: 0,
-        y: -20,
-        duration: 0.25,
-        delay: 0.3,
-        stagger: 0.3
-      });
-      gsap.from('#meta-form > *', {
-        opacity: 0,
-        y: -20,
-        duration: 0.5,
-        delay: 0.3,
-        stagger: 0.1
-      });
-      gsap.from('#meta-tag, #copy-button, footer', {
-        opacity: 0,
-        y: -20,
-        duration: 0.5,
-        delay: 0.7,
-        stagger: 0.3
-      });
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 
 </html>

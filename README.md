@@ -1,44 +1,51 @@
-# GetAMeta
+# [GetAMeta](https://harsh98trivedi.github.io/GetAMeta)
 
-GetAMeta is a powerful and user-friendly meta tag generator that helps you optimize your website's metadata effortlessly. Boost your search engine visibility, enhance social media sharing, and improve overall website performance with accurate and well-crafted meta tags. Maximize your online presence and drive organic traffic with GetAMeta - the ultimate tool for SEO success.
+[![GetAMeta Logo](https://raw.githubusercontent.com/harsh98trivedi/GetAMeta/master/meta.png)](https://harsh98trivedi.github.io/GetAMeta)
 
-## Introduction
+**GetAMeta** is a fast, accessible, and mobile-ready meta tag generator. Create perfect meta tags for SEO and social media, boost discoverability, and preview your tags instantly—all with a clean dark/light mode–ready, user-friendly interface.
 
-GetAMeta is a web-based meta tag generator built with HTML, CSS, and JavaScript. It provides a user-friendly interface to generate meta tags for optimizing website metadata. The generated meta tags enhance search engine visibility, social media sharing, and overall website performance.
+[**Live App Demo**](https://harsh98trivedi.github.io/GetAMeta/)
 
-The application uses the following libraries and resources:
+## ✨ Features
 
-- [Tailwind CSS](https://tailwindcss.com/) (v2.2.19) - A utility-first CSS framework.
-- [GSAP](https://greensock.com/gsap/) (v3.8.0) - A JavaScript animation library.
-- [jQuery](https://jquery.com/) (v3.5.1) - A fast, small, and feature-rich JavaScript library.
+- **Responsive UI:** Fully optimized for mobile and desktop.
+- **Dark & Light Mode:** Sun icon in dark mode (to switch light), Moon in light mode (to switch dark).
+- **Instant Meta Tag Output:** Previews meta tags as you type.
+- **Dynamic Keyword Management:** Add/remove/reorder keywords as chips. Clicking a suggestion adds it to the start of your keywords.
+- **Smart Keyword Suggestions:** Suggests keywords based on your inputs using built-in logic (and Compromise.js if available).
+- **Clear, Copy, Generate:** Copy meta tags to clipboard or clear everything with one click (trash can appears on mobile).
+- **Meta Image & Revisit:** Customize your OG image and search engine revisit interval.
 
-## Usage
+## 🖥️ App Overview
 
-To use GetAMeta, follow these steps:
+**Input Fields:**
+- Website Title (max 60 chars)
+- Description (max 160 chars)
+- Keywords (add by typing or click suggestions; shown as colored chips)
+- Meta Image URL (for social/OG)
+- Revisit Days
 
-1. Clone or download the repository from [GitHub](https://github.com/harsh98trivedi/GetAMeta).
-2. Open the `index.html` file in a web browser.
+**Actions:**
+- Generate: Create valid meta tags.
+- Copy: Copy tags to clipboard.
+- Clear: Reset all input fields (displays trash can icon on mobile).
 
-On the GetAMeta webpage, you can enter the following details:
+## ⚙️ Tech Stack
 
-- Title of your website
-- Description of your website
-- Keywords (separated by commas)
-- Meta Image URL (optional)
-- Crawl this Website Every 'X' Days (minimum value is 1)
+- **HTML5, CSS3:** Custom responsive design.
+- **JavaScript + jQuery:** Smooth and simple UI.
+- **[Tailwind](https://tailwindcss.com/):** A utility-first CSS framework.
+- **[Compromise.js](https://compromise.cool/):** Optional, enhances English keyword suggestions—built-in fallback always works.
+- **[GSAP](https://greensock.com/gsap/):** A JavaScript animation library.
 
-Once you have entered the necessary information, click the "Generate" button. The generated meta tags will appear in the "Your Meta Tags Will Appear Here" textarea. You can copy the generated meta tags by clicking the "Copy" button.
+## 👩‍💻 Contributing
 
-The application also provides the ability to add keywords as labels dynamically. You can enter keywords in the "Keywords (separated by commas)" input field, and they will be displayed as labels below. To remove a keyword, click the "x" button on the corresponding label. The "Clear" button clears all entered keywords.
-
-## Contributing
-
-Contributions to GetAMeta are welcome! If you encounter any issues or have suggestions for improvement, please open an issue on the [GitHub repository](https://github.com/harsh98trivedi/GetAMeta).
+Pull requests and suggestions are always welcome.
+- [Open an Issue](https://github.com/harsh98trivedi/GetAMeta/issues)
+- [Submit a Pull Request](https://github.com/harsh98trivedi/GetAMeta/pulls)
 
 ---
 
-[![GetAMeta](https://raw.githubusercontent.com/harsh98trivedi/GetAMeta/master/meta.png)](https://harsh98trivedi.github.io/GetAMeta/)
-
-Visit the [GetAMeta](https://harsh98trivedi.github.io/GetAMeta/) website to try it out yourself!
-
 Made with ❤️ by [Harsh Trivedi](https://htlink.netlify.app)
+
+Try it live: [harsh98trivedi.github.io/GetAMeta/](https://harsh98trivedi.github.io/GetAMeta/)
